@@ -30,6 +30,8 @@ public class C_Homework
 
         //  c. Amazonda goruntulenen ilgili sonuclarin sayisini yazdirin
         WebElement ilgiliSonucSayisi = driver.findElement(By.tagName("span")); //  burasini yapamadim
+        // hoca ile birlikte day04 package'indaki tekrar testi class'inda bursuru deneme yaparak locate edebildik,
+        // guzelce incele
 
         //  e. Sonra karsiniza cikan ilk sonucun resmine tiklayin
 
