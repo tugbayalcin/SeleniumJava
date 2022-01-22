@@ -1,4 +1,4 @@
-package day05_RelativeXPath;
+package day05_RelativeXPathAndMavenProject.day05_RelativeXPath;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

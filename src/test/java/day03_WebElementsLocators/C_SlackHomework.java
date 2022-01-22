@@ -1,49 +1,51 @@
 package day03_WebElementsLocators;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class C_SlackHomework
 {
-    public static void main(String[] args) throws InterruptedException {
-
-        //  1-java class'imiza chromedriver.exe'yi tanitalim
-        System.setProperty("webdriver.chrome.driver","src/driver/chromedriver");
-
-        //  2-driver olusturalim
+    public static void main(String[] args)
+    {
+        System.setProperty("webdriver.chrome.driver", "src/driver/chromedriver");
         WebDriver driver = new ChromeDriver();
-
-        //  3-driver'in tum ekrani kaplamasini saglayalim
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
-        //  4-https://github.com/ adresine gidelim
-        driver.navigate().to("https://github.com/");
-        Thread.sleep(1000);
+        //1.  https://id.heroku.com/login sayfasina gidin
+        driver.get("https://id.heroku.com/login");
 
-        //  5-Ardindan https://www.hepsiburada.com/ adrsine gidelim
-        driver.navigate().to("https://www.hepsiburada.com/");
-        Thread.sleep(1000);
+        //2.  Bir mail adersi giriniz
+        WebElement mailTextBox = driver.findElement(By.xpath("//input[@id='email']"));
+        mailTextBox.sendKeys("esttechproed@gmail.com");
 
-        //  6-Title ve url console da yazdirin ve yine title ve url in "burada" kelimesini icerip icermedigini kontrol edelim
-        String currentTitle = driver.getTitle();
-        String currentUrl = driver.getCurrentUrl();
+        //3.  Bir password giriniz
+        WebElement passwordTextBox = driver.findElement(By.xpath("//input[@id='password']"));
+        passwordTextBox.sendKeys("Test1234!");
 
-        System.out.println("Title: " + currentTitle);
-        System.out.println("URL: " + currentUrl);
+        //4.  Login butonuna tiklayiniz
+        WebElement loginButton = driver.findElement(By.xpath("//button[@name='commit']"));
+        loginButton.click();
 
-        String word = "burada";
+        //5.  "There was a problem with your login." texti gorunur ise
+        WebElement logginMessage = driver.findElement(By.xpath("//div[@class='alert alert-danger']"));
 
-        System.out.println(currentTitle.contains(word) ? "Title Test Passed" : "Title Test Failed. Actual Title is: " + currentTitle);
-        System.out.println(currentUrl.contains(word) ? "URL Test Passed" : "URL Test Failed. Actual URL is: " + currentUrl);
+        if(logginMessage.isDisplayed())
+        {
+            System.out.println("kayit yapilamadi");
+        }
+        else
+        {
+            System.out.println("kayit yapildi");
+        }
 
-        //  7-Sonrasinda https://github.com/ adresine geri donelim ve  sayfayi yenileyelim
-        driver.navigate().back();
-        Thread.sleep(1000);
-        driver.navigate().refresh();
-        Thread.sleep(1000);
-
-        //  8-Son adim olarak butun sayfalarimizi kapatmis olalim
+        //6.  "kayit yapilamadi" yazdiriniz
+        //8.  eger yazi gorunur degilse "kayit yapildi" yazdiriniz
+        //9.  Tum sayfalari kapatiniz
         driver.quit();
 
     }
